@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Қолжетімді веб-сайт - Accessibility демонстрациясы">
+    <title>Қолжетімді сайт | Басты бет</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background-color: #f5f5f5;
+        }
+
+        /* Жоғары контрастты түстер WCAG AA стандартына сай */
+        :root {
+            --primary-bg: #0a2b44;      /* Көк -- ақ мәтінге контраст 8.5:1 */
+            --primary-text: white;
+            --card-bg: white;
+            --text-dark: #1a1a1a;
+            --text-light: #2c2c2c;
+            --focus-ring: #ffbf47;
+        }
+
+        /* Клавиатура фокусы */
+        a:focus, button:focus, input:focus, textarea:focus {
+            outline: 3px solid var(--focus-ring);
+            outline-offset: 2px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary-bg);
+            color: var(--primary-text);
+            padding: 1rem 0;
+            border-bottom: 3px solid #ffbf47;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Навигация */
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        nav a:hover {
+            background-color: #1e4a76;
+            text-decoration: underline;
+        }
+
+        /* Негізгі мазмұн */
+        main {
+            background-color: white;
+            padding: 2rem;
+            margin: 2rem auto;
+            border-radius: 8px;
+            max-width: 1100px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        h1 { font-size: 2rem; }
+        h2 { font-size: 1.5rem; border-bottom: 2px solid #0a2b44; padding-bottom: 0.25rem; }
+        h3 { font-size: 1.25rem; color: #0a2b44; }
+
+        /* Форма */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            border-color: #0a2b44;
+            outline: none;
+        }
+
+        .error-message {
+            color: #b91c1c;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        button {
+            background-color: #0a2b44;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background-color: #1e4a76;
+        }
+
+        /* Жоба карточкалары */
+        .projects-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .project-card {
+            background: #f9f9f9;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #0a2b44;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            color: #ccc;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+
+        footer a {
+            color: #ffbf47;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>Қолжетімді сайт</h1>
+        <nav aria-label="Басты навигация">
+            <ul>
+                <li><a href="#" aria-current="page">Басты бет</a></li>
+                <li><a href="#">Жобалар</a></li>
+                <li><a href="#">Қызметтер</a></li>
+                <li><a href="#">Байланыс</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section aria-labelledby="about-title">
+        <h2 id="about-title">Біз туралы</h2>
+        <p>Біздің сайт барлық пайдаланушыларға, соның ішінде мүмкіндігі шектеулі адамдарға арналған. Біз WCAG AA стандартын ұстанамыз.</p>
+    </section>
+
+    <section aria-labelledby="projects-title">
+        <h2 id="projects-title">Жобаларымыз</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3>Веб-қолжетімділік курсы</h3>
+                <p>WCAG нұсқаулықтарын үйреніңіз.</p>
+            </div>
+            <div class="project-card">
+                <h3>Axe тестілеу</h3>
+                <p>Автоматты қолжетімділік тексеру.</p>
+            </div>
+        </div>
+    </section>
+
+    <section aria-labelledby="contact-title">
+        <h2 id="contact-title">Байланыс формасы</h2>
+
+        <form id="contactForm" novalidate>
+            <!-- Аты-жөні өрісі -->
+            <div class="form-group">
+                <label for="fullname">Аты-жөні *</label>
+                <input type="text" id="fullname" name="fullname" required aria-required="true">
+                <div id="fullname-error" class="error-message" aria-live="polite"></div>
+            </div>
+
+            <!-- Email өрісі -->
+            <div class="form-group">
+                <label for="email">Электрондық пошта *</label>
+                <input type="email" id="email" name="email" required aria-required="true" aria-describedby="email-hint">
+                <div id="email-hint" class="hint">Мысалы: name@example.com</div>
+                <div id="email-error" class="error-message" aria-live="polite"></div>
+            </div>
+
+            <!-- Хабарлама -->
+            <div class="form-group">
+                <label for="message">Хабарлама *</label>
+                <textarea id="message" name="message" rows="4" required aria-required="true"></textarea>
+                <div id="message-error" class="error-message" aria-live="polite"></div>
+            </div>
+
+            <button type="submit" aria-label="Хабарламаны жіберу">Жіберу</button>
+        </form>
+
+        <div id="form-status" role="status" aria-live="polite" style="margin-top: 1rem;"></div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>© 2025 Қолжетімді сайт. Барлық құқықтар қорғалған.</p>
+        <p><a href="#">Қолжетімділік туралы мәлімдеме</a></p>
+    </div>
+</footer>
+
+<script>
+    (function() {
+        // Форма валидациясы (ARIA қолдауымен)
+        const form = document.getElementById('contactForm');
+        const fullnameInput = document.getElementById('fullname');
+        const emailInput = document.getElementById('email');
+        const messageInput = document.getElementById('message');
+
+        const fullnameError = document.getElementById('fullname-error');
+        const emailError = document.getElementById('email-error');
+        const messageError = document.getElementById('message-error');
+        const formStatus = document.getElementById('form-status');
+
+        function clearErrors() {
+            fullnameError.textContent = '';
+            emailError.textContent = '';
+            messageError.textContent = '';
+            [fullnameInput, emailInput, messageInput].forEach(input => {
+                input.setAttribute('aria-invalid', 'false');
+            });
+        }
+
+        function showError(input, errorDiv, message) {
+            errorDiv.textContent = message;
+            input.setAttribute('aria-invalid', 'true');
+            input.setAttribute('aria-describedby', errorDiv.id);
+        }
+
+        function validateForm() {
+            let isValid = true;
+            clearErrors();
+
+            // Аты-жөні тексеру
+            if (!fullnameInput.value.trim()) {
+                showError(fullnameInput, fullnameError, 'Аты-жөніңізді енгізіңіз');
+                isValid = false;
+            }
+
+            // Email тексеру
+            const email = emailInput.value.trim();
+            if (!email) {
+                showError(emailInput, emailError, 'Электрондық поштаңызды енгізіңіз');
+                isValid = false;
+            } else if (!email.includes('@') || !email.includes('.')) {
+                showError(emailInput, emailError, 'Жарамды электрондық пошта енгізіңіз (мысалы: name@example.com)');
+                isValid = false;
+            }
+
+            // Хабарлама тексеру
+            if (!messageInput.value.trim()) {
+                showError(messageInput, messageError, 'Хабарламаңызды енгізіңіз');
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (validateForm()) {
+                formStatus.textContent = '✅ Хабарламаңыз сәтті жіберілді!';
+                form.reset();
+                clearErrors();
+                setTimeout(() => { formStatus.textContent = ''; }, 5000);
+            } else {
+                formStatus.textContent = '❌ Қателер бар. Төмендегі нұсқауларды орындаңыз.';
+                // Фокус бірінші қатеге ауысады
+                const firstError = document.querySelector('[aria-invalid="true"]');
+                if (firstError) firstError.focus();
+            }
+        });
+    })();
+</script>
+</body>
+</html>
